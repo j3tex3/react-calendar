@@ -1,0 +1,35 @@
+@import '../../Variables.scss';
+
+.day {
+  position: relative;
+  cursor: pointer;
+  transition: color, background 0.2s ease-in-out;
+  &:not(.day-empty):not(.day-active):not(.has-matches):hover {
+    color: $col-main;
+    background: rgba(0, 0, 0, 0.05);
+  }
+  &.day-active {
+    color: #fff;
+    background: $col-main;
+    &.has-events::before { background: $col-bg; }
+  }
+  &.day-empty { cursor: initial; }
+
+  &.has-events {
+    &::before {
+      content: "";
+      position: absolute;
+      display: block;
+      top:    0.40rem;
+      left:   0.40rem;
+      width:  0.35rem;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: $col-main;
+    }
+  }
+  &.has-matches:not(.day-active) {
+    background: rgba(255, 0, 0, 0.1);
+    color: $col-main;
+  }
+}

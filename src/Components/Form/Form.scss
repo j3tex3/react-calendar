@@ -1,0 +1,14 @@
+@import '../../Variables.scss';
+
+.input-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    input{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    button{
+        width: 100%;
+    }
+}
