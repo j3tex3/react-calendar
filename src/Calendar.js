@@ -145,7 +145,7 @@ export default class Calendar extends React.Component {
     }
   }
   searchEvent(value) {
-    if (value) {
+    if (value.length >= 2) {
       let eventsDates = Object.getOwnPropertyNames(this.state.events);
       value = value.toLowerCase();
       let findings = [];
@@ -153,9 +153,9 @@ export default class Calendar extends React.Component {
       for (let i = 0; i < Object.keys(this.state.events).length; i++) {
         this.state.events[eventsDates[i]].map(item => {
           if (
-            value.includes(item.person.toLowerCase()) ||
-            value.includes(item.desc.toLowerCase()) ||
-            value.includes(eventsDates[i].toLowerCase())
+            item.person.toLowerCase().includes(value) ||
+            item.desc.toLowerCase().includes(value) ||
+            eventsDates[i].toLowerCase().includes(value)
           ) {
             findings.push({
               date: eventsDates[i],
@@ -164,8 +164,11 @@ export default class Calendar extends React.Component {
             });
           }
         });
+        
         this.setState({ findings });
       }
+    } else {
+      this.setState({findings:[]})
     }
   }
 
@@ -181,7 +184,7 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    console.log(this.state.cursor);
+    console.log(this.state.events);
     let date = new Date(this.state.year, this.state.month, 1);
     let weekDay = date.getDay() !== 0 ? date.getDay() : 7;
 
